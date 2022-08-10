@@ -1,0 +1,20 @@
+nav {
+  border-bottom: 1px solid rgb(255 255 255 / 0.75);
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    li {
+      a {
+        color: #646cff;
+        transition: all 0.3s ease;
+        margin: 0 1rem;
+        font-size: 1.2rem;
+        &:hover {
+          color: lighten(#646cff, 15%);
+        }
+      }
+    }
+  }
+}
