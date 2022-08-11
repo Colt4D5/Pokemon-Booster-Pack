@@ -4,30 +4,74 @@ import pokemon from 'pokemontcgsdk'
 
 function Set() {
   const [cards, setCards] = useState([])
-  const [page, setPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
   const { setId } = useParams()
 
   useEffect( () => {
-    pokemon.card.where({q: `set.id:${setId}`})
+    const cardsPerPage = 12
+    const query = {
+      q: `set.id:${setId}`,
+      pageSize: cardsPerPage,
+      page: currentPage
+    }
+    pokemon.card.where(query)
       .then(result => {
-        console.log(result)
-          setCards(result.data)
-          document.title = `Pokemon TCG | ${result.data[0].set.name} `
+        setCards(result.data)
+        const numPages = Math.ceil(result.totalCount / cardsPerPage)
+        setTotalPages(numPages)
+        document.title = `Pokemon TCG | ${result.data[0].set.name} `
+        const previousBtn = document.querySelector('.page-btn.previous')
+        const nextBtn = document.querySelector('.page-btn.next')
+        
+        if (numPages > 1 && currentPage !== numPages && currentPage === 1) { // if on 1st page of many
+          previousBtn.classList.add('disabled')
+          nextBtn.classList.remove('disabled')
+        } else if (numPages > 1 && currentPage === numPages) { // on last page of many
+          previousBtn.classList.remove('disabled')
+          nextBtn.classList.add('disabled')
+        } else if (numPages > 1 && currentPage > 1 && currentPage < numPages) { // if on middle page of many
+          previousBtn.classList.remove('disabled')
+          nextBtn.classList.remove('disabled')
+        } else if (numPages === 1 && currentPage === 1) { // if only 1 page
+          previousBtn.classList.add('disabled')
+          nextBtn.classList.add('disabled')
+        }
       })
-  }, [])
+      }, [currentPage])
+
+  function handlePaginate(e) {
+    const value = parseInt(e.target.dataset.pageValue)
+    setCurrentPage(prevPage => prevPage + value)
+  }
 
   return (
-    <div id="set-grid">
-      {cards && cards.map(card => {
-        return (
-          <div className={`card ${card.rarity}`} data-card-id={card.id} key={card.id}>
-            <img src={card.images.small} alt={card.name} />
-            <h4>{card.name}</h4>
-          </div>
-        )
-      })}
-    </div>
+    <main>
+      <div id="set-grid">
+        {cards && cards.map(card => {
+          return (
+            <div className={`card ${card.rarity}`} data-card-id={card.id} key={card.id}>
+              <img src={card.images.small} alt={card.name} />
+              <h4>{card.name}</h4>
+            </div>
+          )
+        })}
+      </div>
+      <div className="pagination">
+        <button data-page-value={-1} className="page-btn previous" onClick={handlePaginate}>Previous</button>
+        <span className="current-page">{currentPage}</span>
+        <button data-page-value={1} className="page-btn next" onClick={handlePaginate}>Next</button>
+      </div>
+    </main>
   )
 }
 
 export default Set
+
+
+/*
+1. If only 1 page, disable previous and next buttons
+2. If on 1st page of many, disable previous button
+3. If on last page of many, disable next button
+4. If on middle page of many, enable both buttons
+*/

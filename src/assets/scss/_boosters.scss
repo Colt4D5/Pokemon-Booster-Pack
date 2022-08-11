@@ -46,3 +46,20 @@
     }
   }
 }
+
+.pagination {
+  button {
+    margin: 0 1rem;
+    min-width: 115px;
+    border-radius: 25px;
+    &.disabled {
+      opacity: 0.2;
+      pointer-events: none;
+    }
+  }
+  span.current-page {
+    font-size: 1.25rem;
+    color: v.$purple;
+    font-weight: 500;
+  }
+}
