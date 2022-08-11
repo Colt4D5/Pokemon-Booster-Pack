@@ -1,0 +1,24 @@
+@use 'variables' as v;
+
+#featured-card {
+  display: flex;
+  justify-content: center;
+  & > .featured-image {
+    width: 45%;
+    text-align: right;
+  }
+  .featured-details {
+    text-align: left;
+    width: 55%;
+    padding: 0 2rem;
+    h2 {
+      font-size: 3rem;
+    }
+    .attacks {
+      margin: 0;
+    }
+    ul {
+      margin: 0;
+    }
+  }
+}

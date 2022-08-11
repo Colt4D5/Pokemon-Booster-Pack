@@ -47,6 +47,7 @@ function Set() {
 
   return (
     <main>
+      <h1>{cards && cards[0]?.set?.name}</h1>
       <div id="set-grid">
         {cards && cards.map(card => {
           return (
@@ -59,7 +60,7 @@ function Set() {
       </div>
       <div className="pagination">
         <button data-page-value={-1} className="page-btn previous" onClick={handlePaginate}>Previous</button>
-        <span className="current-page">{currentPage}</span>
+        <span className="current-page">{currentPage}</span> of <span className="total-pages">{totalPages}</span>
         <button data-page-value={1} className="page-btn next" onClick={handlePaginate}>Next</button>
       </div>
     </main>
@@ -67,11 +68,3 @@ function Set() {
 }
 
 export default Set
-
-
-/*
-1. If only 1 page, disable previous and next buttons
-2. If on 1st page of many, disable previous button
-3. If on last page of many, disable next button
-4. If on middle page of many, enable both buttons
-*/

@@ -18,13 +18,14 @@ function FeaturedCard() {
       })
       .then(cards => {
         const feature = cards[Math.floor(Math.random() * cards.length)]
-        // console.log(feature);
+        console.log(feature);
         setFeaturedCard(feature)
     })
   }, [])
 
   return (
-    <>
+    <main>
+      <h1>Today's Featured Card</h1>
       {featuredCard.images && (
         <div id="featured-card">
           <div className="featured-image">
@@ -32,6 +33,7 @@ function FeaturedCard() {
           </div>
           <div className="featured-details">
             <h2>{featuredCard.name}</h2>
+            {featuredCard.supertype && <h4><b>Card Type:</b> {featuredCard.supertype}</h4>}
             {featuredCard.nationalPokedexNumbers && (
               <h4><b>Pokedex Entry:</b> #{featuredCard.nationalPokedexNumbers[0]}</h4>
             )}
@@ -52,7 +54,7 @@ function FeaturedCard() {
           </div>
         </div>
       )}
-    </>
+    </main>
   )
 }
 

@@ -21,18 +21,21 @@ function Sets() {
   }
 
   return (
-    <div id="sets-grid">
-      {sets && sets.map(set => {
-        if (!set.id.includes('mcd')) {
-          return (
-            <div key={set.id} className="set" data-set-id={set.id} onClick={handleClickSet}>
-              <img className="set-logo" src={set.images.logo} alt={set.name} />
-              <h2>{set.name}</h2>
-            </div>
-          )
-        }
-      })}
-    </div>
+    <main>
+      <h1>All Booster Sets</h1>
+      <div id="sets-grid">
+        {sets && sets.map(set => {
+          if (!set.id.includes('mcd')) {
+            return (
+              <div key={set.id} className="set" data-set-id={set.id} onClick={handleClickSet}>
+                <img className="set-logo" src={set.images.logo} alt={set.name} />
+                <h2>{set.name}</h2>
+              </div>
+            )
+          }
+        })}
+      </div>
+    </main>
   )
 }
 
