@@ -1,0 +1,48 @@
+@use 'variables' as v;
+
+#booster-pack-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  .booster {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 1rem;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.2s v.$bounce;
+    position: relative;
+    cursor: pointer;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: linear-gradient(325deg, hsla(0, 0%, 35%, 0.5), hsla(0, 0%, 35%, 0.7), hsla(0, 0%, 35%, 0.9));
+      z-index: -1;
+      opacity: 0.2;
+      border-radius: 1rem;
+      transition: opacity 0.25s ease;
+    }
+    &:hover {
+      &::before {
+        opacity: 0.5;
+      }
+      h2 {
+        color: lighten(v.$purple, 15%);
+      }
+    }
+    img {
+      width: 100px;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      object-position: center;
+    }
+    h2 {
+      margin-left: 2rem;
+      margin-bottom: 0;
+    }
+  }
+}

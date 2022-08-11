@@ -1,6 +1,8 @@
 @forward 'sets';
 @forward 'set';
 @forward 'nav';
+@forward 'boosters';
+@use 'variables' as v;
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
@@ -9,7 +11,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: v.$background;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,11 +22,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: v.$purple;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: lighten(v.$purple, 10%);
 }
 
 body {
@@ -54,7 +56,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: v.$purple;
 }
 button:focus,
 button:focus-visible {

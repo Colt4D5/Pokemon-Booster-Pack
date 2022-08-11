@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import pokemon from 'pokemontcgsdk'
 
 function Sets() {
   const [sets, setSets] = useState([])
   let navigate = useNavigate();
 
   useEffect( () => {
-    fetch('https://api.pokemontcg.io/v2/sets?orderBy=-number', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    pokemon.set.all()
+      .then((cards) => {
+        setSets(cards)
       })
-      .then(res => res.json())
-      .then(data => setSets(data.data))
   }, [])
 
   function handleClickSet(e) {

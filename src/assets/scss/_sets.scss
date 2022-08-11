@@ -1,3 +1,5 @@
+@use 'variables' as v;
+
 #sets-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -8,10 +10,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    .set-logo {
+    cursor: pointer;
+    &:hover {
+      img.set-logo {
+        transform: scale(1.1);
+        transition: all 0.2s v.$bounce;
+      }
+    }
+    img.set-logo {
       max-width: 200px;
       max-height: 150px;
       padding-bottom: 1rem;
+      transition: all 0.2s ease-out;
     }
     h2 {
       
