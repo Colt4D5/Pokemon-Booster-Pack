@@ -18,7 +18,7 @@ function FeaturedCard() {
       })
       .then(cards => {
         const feature = cards[Math.floor(Math.random() * cards.length)]
-        console.log(feature);
+        // console.log(feature);
         setFeaturedCard(feature)
     })
   }, [])
