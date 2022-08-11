@@ -12,7 +12,7 @@ function Nav() {
           <Link to="/sets">Sets</Link>
         </li>
         <li>
-          <Link to="/cards">Cards</Link>
+          <Link to="/open-booster-pack">Open Booster</Link>
         </li>
       </ul>
     </nav>

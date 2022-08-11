@@ -1,0 +1,12 @@
+#set-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.75rem;
+  .card {
+    max-width: 100%;
+    img {
+      aspect-ratio: 245 / 342;
+      max-width: 100%;
+    }
+  }
+}

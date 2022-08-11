@@ -1,28 +1,44 @@
 import React, { useState, useEffect } from 'react'
+import SetIds from '../utilities/sets'
 
 function FeaturedCard() {
   const [featuredCard, setFeaturedCard] = useState({})
 
   useEffect( () => {
-    fetch('https://api.pokemontcg.io/v2/sets?select=id', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+    const randomSet = SetIds[Math.floor(Math.random() * SetIds.length)]
+    fetch(`https://api.pokemontcg.io/v2/cards?q=set.id:${randomSet}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
       .then(res => res.json())
-      .then(data => data.data[Math.floor(Math.random() * data.data.length)].id )
-      .then(setId => fetch(`https://api.pokemontcg.io/v2/cards?q=set.id:${setId}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(res => res.json())
-        .then(data => {
-          console.log(data)
-          setFeaturedCard(data.data[Math.floor(Math.random() * data.data.length)])
-        } ))
+      .then(data => {
+        console.log(data)
+        setFeaturedCard(data.data[Math.floor(Math.random() * data.data.length)])
+      } )
+    // fetch('https://api.pokemontcg.io/v2/sets?select=id', {
+    //     method: 'GET',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     console.log(data.data);
+    //     return data.data[Math.floor(Math.random() * data.data.length)].id 
+    //   })
+    //   .then(setId => fetch(`https://api.pokemontcg.io/v2/cards?q=set.id:${setId}`, {
+    //     method: 'GET',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       console.log(data)
+    //       setFeaturedCard(data.data[Math.floor(Math.random() * data.data.length)])
+    //     } ))
   }, [])
 
   return (
