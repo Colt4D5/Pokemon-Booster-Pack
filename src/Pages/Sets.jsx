@@ -6,6 +6,8 @@ function Sets() {
   const [sets, setSets] = useState([])
   let navigate = useNavigate();
 
+  document.title = 'Pokemon TCG | Booster Sets'
+
   useEffect( () => {
     pokemon.set.all()
       .then((cards) => {

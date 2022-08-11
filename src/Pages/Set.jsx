@@ -4,12 +4,15 @@ import pokemon from 'pokemontcgsdk'
 
 function Set() {
   const [cards, setCards] = useState([])
+  const [page, setPage] = useState(1)
   const { setId } = useParams()
 
   useEffect( () => {
-    pokemon.card.all({q: `set.id:${setId}` })
+    pokemon.card.where({q: `set.id:${setId}`})
       .then(result => {
-          setCards(result)
+        console.log(result)
+          setCards(result.data)
+          document.title = `Pokemon TCG | ${result.data[0].set.name} `
       })
   }, [])
 

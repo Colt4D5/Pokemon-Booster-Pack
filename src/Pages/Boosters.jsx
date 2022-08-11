@@ -4,6 +4,8 @@ import pokemon from 'pokemontcgsdk'
 function OpenPack() {
   const [sets, setSets] = useState([])
 
+  document.title = 'Pokemon TCG | Booster Packs'
+
   useEffect( () => {
     pokemon.set.all()
       .then((cards) => {
