@@ -1,0 +1,8 @@
+@use 'variables' as v;
+
+#opened-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
+  gap: 2rem;
+}
