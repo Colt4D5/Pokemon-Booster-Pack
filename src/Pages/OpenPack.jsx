@@ -16,14 +16,21 @@ function OpenPack() {
         const commons = result.data.filter(card => card.rarity === "Common")
         const uncommons = result.data.filter(card => card.rarity === "Uncommon")
         const rares = result.data.filter(card => card.rarity !== "Common" && card.rarity !== "Uncommon")
-        const commonDraws = getCards(5, commons)
-        const uncommonDraws = getCards(4, uncommons)
-        const rareDraws = getCards(1, rares)
-        setCards([...commonDraws, ...uncommonDraws, ...rareDraws])
+        
+        if (commons.length >= 5 && uncommons.length >= 4 && rares.length >= 1) {
+          const commonDraws = getCards(5, commons)
+          const uncommonDraws = getCards(4, uncommons)
+          const rareDraws = getCards(1, rares)
+          setCards([...commonDraws, ...uncommonDraws, ...rareDraws])
+        } else {
+          const randomCards = getCards(10, result.data)
+          setCards(randomCards)
+        }
       })
   }, [])
 
   function getCards(num, cards) {
+    console.log(cards)
     const randomCards = new Set()
     while (randomCards.size < num) {
       const randomIndex = Math.floor(Math.random() * cards.length)
@@ -43,7 +50,7 @@ function OpenPack() {
       <div id="opened-cards-grid">
         {cards && cards.map(card => {
           return (
-            <div className={`card ${card.rarity}`} data-card-id={card.id} key={card.id}>
+            <div className={`card ${card.rarity.toLowerCase().replace(' ', '')}`} data-card-id={card.id} key={card.id}>
               <img src={card.images.small} alt={card.name} />
               <h4>{card.name}</h4>
               <h5>{card.rarity}</h5>

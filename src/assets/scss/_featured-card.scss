@@ -6,11 +6,17 @@
   & > .featured-image {
     width: 45%;
     text-align: right;
+    img {
+      width: 75%;
+    }
   }
   .featured-details {
     text-align: left;
-    width: 55%;
+    width: 45%;
     padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     h2 {
       font-size: 3rem;
     }

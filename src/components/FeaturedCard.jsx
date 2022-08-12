@@ -29,7 +29,7 @@ function FeaturedCard() {
       {featuredCard.images && (
         <div id="featured-card">
           <div className="featured-image">
-            <img src={featuredCard.images.small} alt={featuredCard.name} />
+            <img src={featuredCard.images.large} alt={featuredCard.name} />
           </div>
           <div className="featured-details">
             <h2>{featuredCard.name}</h2>
