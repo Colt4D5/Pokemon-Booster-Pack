@@ -6,6 +6,7 @@ import Sets from './Pages/Sets'
 import Set from './Pages/Set'
 import Boosters from './Pages/Boosters'
 import BoostersOutlet from './Pages/BoostersOutlet'
+import RegisterUser from './Pages/RegisterUser'
 import OpenPack from './Pages/OpenPack'
 
 import pokemon from 'pokemontcgsdk'
@@ -28,6 +29,7 @@ function App() {
           <Route path=":setId" element={<OpenPack />} />
           <Route index element={<Boosters />} />
         </Route>
+        <Route path="register" element={<RegisterUser />} />
       </Routes>
     </div>
   )

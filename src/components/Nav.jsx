@@ -14,6 +14,9 @@ function Nav() {
         <li>
           <Link to="/booster-packs">Open Booster</Link>
         </li>
+        <li id="signup">
+          <Link to="/register">Log In/Sign Up</Link>
+        </li>
       </ul>
     </nav>
   )

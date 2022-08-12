@@ -1,0 +1,25 @@
+@use 'variables' as v;
+
+form#register-form, form#login-form {
+  display: inline-block;
+  background-color: lighten(v.$background, 5%);
+  background: linear-gradient(325deg, lighten(v.$background, 5%) 0%, lighten(v.$background, 10%) 100%);
+  padding: 3rem 4rem;
+  border-radius: 1.5rem;
+  text-align: left;
+  input {
+    display: block;
+    min-width: 400px;
+    padding: 0.5em;
+  }
+  button[type=submit] {
+    display: block;
+    width: 100%;
+  }
+  #login-text, #login-text {
+    text-align: right;
+    p {
+      margin-bottom: 0;
+    }
+  }
+}

@@ -5,6 +5,7 @@ nav {
     justify-content: center;
     align-items: center;
     list-style: none;
+    position: relative;
     li {
       a {
         color: #646cff;
@@ -14,6 +15,10 @@ nav {
         &:hover {
           color: lighten(#646cff, 15%);
         }
+      }
+      &#signup {
+        position: absolute;
+        right: 0;
       }
     }
   }
