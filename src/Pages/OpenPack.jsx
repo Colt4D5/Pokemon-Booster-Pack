@@ -12,7 +12,6 @@ function OpenPack() {
     }
     pokemon.card.where(query)
       .then(result => {
-        // console.log(result);
         const commons = result.data.filter(card => card.rarity === "Common")
         const uncommons = result.data.filter(card => card.rarity === "Uncommon")
         const rares = result.data.filter(card => card.rarity !== "Common" && card.rarity !== "Uncommon")
@@ -21,7 +20,28 @@ function OpenPack() {
           const commonDraws = getCards(5, commons)
           const uncommonDraws = getCards(4, uncommons)
           const rareDraws = getCards(1, rares)
-          setCards([...commonDraws, ...uncommonDraws, ...rareDraws])
+          const openedCards = [...commonDraws, ...uncommonDraws, ...rareDraws]
+          setCards(openedCards)
+          fetch('http://localhost:3000/cards/open-pack', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify({
+              setId: setId,
+              cards: openedCards,
+              dateOpened: new Date(),
+              token: localStorage.getItem('token')
+            })
+          })
+            .then(res => res.json())
+            .then(data => {
+              console.log(data);
+              // if (data.status === 'success') {
+              //   console.log('success')
+              // }
+            })
         } else {
           const randomCards = getCards(10, result.data)
           setCards(randomCards)
@@ -30,7 +50,6 @@ function OpenPack() {
   }, [])
 
   function getCards(num, cards) {
-    console.log(cards)
     const randomCards = new Set()
     while (randomCards.size < num) {
       const randomIndex = Math.floor(Math.random() * cards.length)

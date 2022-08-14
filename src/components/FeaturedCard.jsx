@@ -17,9 +17,10 @@ function FeaturedCard() {
         return pokemon.card.all({q: `set.id:${setId}` })
       })
       .then(cards => {
-        const feature = cards[Math.floor(Math.random() * cards.length)]
-        // console.log(feature);
-        setFeaturedCard(feature)
+        if (cards) {
+          const feature = cards[Math.floor(Math.random() * cards.length)]
+          setFeaturedCard(feature)
+        }
     })
   }, [])
 

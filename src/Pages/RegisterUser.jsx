@@ -15,6 +15,35 @@ function RegisterUser() {
     document.querySelector('form#register-form').style.display = ''
   }
 
+  function handleSubmitLogin(e) {
+    e.preventDefault()
+    
+    const formData = new FormData(e.target)
+    const data = {}
+    formData.forEach((value, key) => {
+      data[key] = value
+    }
+    )
+    // console.log(data)
+
+    fetch('http://localhost:3000/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          alert(data.error)
+        } else {
+          localStorage.setItem('token', data.token)
+          window.location.href = '/'
+        }
+      })
+  }
+
   return (
     <main>
       <h1>Sign Up</h1>
@@ -38,7 +67,7 @@ function RegisterUser() {
         </div>
       </form>
 
-      <form id="login-form" style={{display: 'none'}} action="http://localhost:3000/users/login" method="POST">
+      <form id="login-form" style={{display: 'none'}} onSubmit={handleSubmitLogin} action="http://localhost:3000/users/login" method="POST">
         <label htmlFor="email">Email Address</label>
         <input type="text" id="email" name="email" required />
         <label htmlFor="password">Password</label>
